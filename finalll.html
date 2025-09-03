@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Prapthiiii ❤️</title>
+<style>
+  body {
+    margin:0; overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    text-align:center; 
+    background:#fff0f6;
+    transition: background 2s;
+  }
+  .center { margin-top:10vh; }
+  button {
+    padding:15px 25px; font-size:20px;
+    border:none; border-radius:12px;
+    background:#ff4d6d; color:white; cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  }
+  #cakeSection { display:none; margin-top:20px; }
+  #cakeMsg { font-size:28px; margin-top:15px; font-weight:bold; color:#ff3366; }
+  #loveMsg { font-size:20px; margin-top:10px; color:#fff; }
+  #wishForm { margin-top:20px; }
+  textarea {
+    padding:10px; width:250px; margin-top:8px;
+    border-radius:8px; border:1px solid #ccc; resize:none;
+  }
+  .balloon {
+    position:fixed; bottom:-120px;
+    width:40px; height:55px; border-radius:50%;
+    background: pink; animation: rise 8s linear forwards;
+    z-index:3;
+  }
+  @keyframes rise {
+    from { transform:translateY(0); opacity:1; }
+    to { transform:translateY(-120vh); opacity:0; }
+  }
+  svg { cursor:pointer; width:200px; margin-top:10px; }
+  #teddySvg { width:90px; margin-top:10px; }
+  .star {
+    position:fixed; width:2px; height:2px; background:white;
+    border-radius:50%; opacity:0.8;
+    animation: twinkle 3s infinite;
+  }
+  @keyframes twinkle {
+    0% { opacity:0.2; }
+    50% { opacity:1; }
+    100% { opacity:0.2; }
+  }
+</style>
+</head>
+<body>
+
+<div class="center">
+  <button id="surpriseBtn">🎁 Surprise</button>
+
+  <div id="cakeSection">
+    <h2 id="cakeMsg"></h2>
+    <p>🎂 Swipe / click the cake to blow the candles!</p>
+
+    <!-- 🎂 Cartoon Cake -->
+    <svg id="cakeSvg" viewBox="0 0 200 250">
+      <!-- Plate -->
+      <ellipse cx="100" cy="230" rx="90" ry="15" fill="#e0e0e0"/>
+      <!-- Bottom layer -->
+      <rect x="30" y="150" width="140" height="60" rx="10" fill="#ffb347"/>
+      <rect x="30" y="180" width="140" height="10" fill="#ff7f50"/>
+      <!-- Top layer -->
+      <rect x="50" y="100" width="100" height="60" rx="10" fill="#ffcccb"/>
+      <rect x="50" y="130" width="100" height="10" fill="#ff9999"/>
+      <!-- Candles -->
+      <rect x="70" y="60" width="10" height="40" fill="#87ceeb"/>
+      <rect x="95" y="60" width="10" height="40" fill="#98fb98"/>
+      <rect x="120" y="60" width="10" height="40" fill="#dda0dd"/>
+      <!-- Flames -->
+      <circle class="flame" cx="75" cy="55" r="7" fill="orange"/>
+      <circle class="flame" cx="100" cy="55" r="7" fill="orange"/>
+      <circle class="flame" cx="125" cy="55" r="7" fill="orange"/>
+    </svg>
+
+    <!-- 🧸 Teddy smaller, under cake -->
+    <svg id="teddySvg" viewBox="0 0 200 200">
+      <!-- Ears -->
+      <circle cx="50" cy="60" r="25" fill="#c68642"/>
+      <circle cx="150" cy="60" r="25" fill="#c68642"/>
+      <!-- Head -->
+      <circle cx="100" cy="100" r="60" fill="#d2a679"/>
+      <!-- Eyes -->
+      <circle cx="80" cy="90" r="8" fill="#000"/>
+      <circle cx="120" cy="90" r="8" fill="#000"/>
+      <!-- Nose -->
+      <ellipse cx="100" cy="110" rx="10" ry="7" fill="#000"/>
+      <!-- Smile -->
+      <path d="M85 120 Q100 135 115 120" stroke="#000" stroke-width="3" fill="none"/>
+      <!-- Body -->
+      <ellipse cx="100" cy="180" rx="70" ry="40" fill="#d2a679"/>
+      <!-- Arms -->
+      <ellipse cx="35" cy="150" rx="25" ry="40" fill="#c68642"/>
+      <ellipse cx="165" cy="150" rx="25" ry="40" fill="#c68642"/>
+      <!-- Heart -->
+      <path d="M100 140
+               C 90 120, 60 120, 60 150
+               C 60 170, 100 190, 100 190
+               C 100 190, 140 170, 140 150
+               C 140 120, 110 120, 100 140 Z"
+            fill="#ff4d6d"/>
+    </svg>
+
+    <div id="loveMsg">I love you the most 💖</div>
+
+    <form id="wishForm" action="https://formspree.io/f/xzzakbog" method="POST">
+      <p>✨ Make a wish and send it to me:</p>
+      <textarea name="wish" placeholder="Type your wish here..." required></textarea><br>
+      <button type="submit">Send Wish</button>
+    </form>
+  </div>
+</div>
+
+<!-- Confetti + Fireworks -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+const surpriseBtn = document.getElementById("surpriseBtn");
+const cakeSection = document.getElementById("cakeSection");
+const cakeMsg = document.getElementById("cakeMsg");
+const cakeSvg = document.getElementById("cakeSvg");
+
+// 🎈 Balloons
+function launchBalloons(count=12){
+  for(let i=0;i<count;i++){
+    const b=document.createElement("div");
+    b.className="balloon";
+    b.style.left=Math.random()*100+"%";
+    b.style.background=`hsl(${Math.random()*360},80%,70%)`;
+    b.style.animationDuration=(6+Math.random()*4)+"s";
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),10000);
+  }
+}
+
+// 🌌 Create stars
+function starryNight(count=100){
+  for(let i=0;i<count;i++){
+    const s=document.createElement("div");
+    s.className="star";
+    s.style.top=Math.random()*100+"%";
+    s.style.left=Math.random()*100+"%";
+    document.body.appendChild(s);
+  }
+}
+
+// 🎉 Surprise button
+surpriseBtn.addEventListener("click",()=>{
+  surpriseBtn.style.display="none";
+  cakeSection.style.display="block";
+  launchBalloons();
+  confetti({particleCount:150,spread:100,origin:{y:0.9}});
+});
+
+// 🎆 Fireworks effect (Japanese style bursts)
+function fireworks(){
+  let duration = 5 * 1000;
+  let end = Date.now() + duration;
+  (function frame(){
+    confetti({
+      particleCount: 100,
+      spread: 360,
+      startVelocity: 60,
+      ticks: 120,
+      origin: { x: Math.random(), y: Math.random() * 0.6 }
+    });
+    if(Date.now() < end) requestAnimationFrame(frame);
+  })();
+}
+
+// 🎂 Blow out candles
+cakeSvg.addEventListener("click",()=>{
+  document.querySelectorAll(".flame").forEach(f=>f.remove());
+  cakeMsg.textContent="Happyyy Birthdayyyy Prapthiiii!! ❤️";
+  // 🌌 change background
+  document.body.style.background="#000814";
+  starryNight(120);
+  // 🎆 fireworks show
+  fireworks();
+});
+</script>
+
+</body>
+</html>
